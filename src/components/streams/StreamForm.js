@@ -25,12 +25,10 @@ class StreamForm extends Component {
     };
 
     onSubmit = (formValues) => {
-        // console.log("formValues: ", formValues);
         this.props.onSubmit(formValues);
     };
 
     render() {
-        console.log("props: ", this.props);
         return (
             <form
                 className="ui form warning"

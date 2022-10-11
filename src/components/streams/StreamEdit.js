@@ -4,15 +4,16 @@ import { fetchStream, editStream } from "../../actions";
 import StreamForm from "./StreamForm";
 
 class StreamEdit extends Component {
-    componentDidMount() {
-        const streamId = this.props.match.params.id;
+    constructor(props) {
+        super(props);
+        this.streamId = this.props.match.params.id;
+    }
 
-        this.props.fetchStream(streamId);
+    componentDidMount() {
+        this.props.fetchStream(this.streamId);
     }
     onSubmit = async (formValues) => {
-        console.log(formValues);
-        const streamId = this.props.match.params.id;
-        await this.props.editStream(streamId, formValues);
+        await this.props.editStream(this.streamId, formValues);
     };
 
     render() {
