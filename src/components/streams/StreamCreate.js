@@ -1,31 +1,9 @@
 import { Component } from "react";
-import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { createStream } from "../../actions";
+import StreamForm from "./StreamForm";
 
 class StreamCreate extends Component {
-    renderError({ touched, error }) {
-        if (touched && error) {
-            return (
-                <div className="ui small warning message">
-                    <div className="header">{error.head}</div>
-                    <div className="">{error.body}</div>
-                </div>
-            );
-        }
-    }
-
-    renderInput = ({ input, label, meta }) => {
-        const className = `field ${meta.error && meta.touched ? "error" : ""}`;
-        return (
-            <div className={className}>
-                <label>{label}</label>
-                <input {...input} autoComplete="off" />
-                {this.renderError(meta)}
-            </div>
-        );
-    };
-
     onSubmit = (formValues) => {
         // console.log("formValues: ", formValues);
         this.props.createStream(formValues);
@@ -34,46 +12,12 @@ class StreamCreate extends Component {
     render() {
         console.log("props: ", this.props);
         return (
-            <form
-                className="ui form warning"
-                onSubmit={this.props.handleSubmit(this.onSubmit)}
-            >
-                <Field
-                    name="title"
-                    label="Stream Title"
-                    component={this.renderInput}
-                />
-                <Field
-                    name="description"
-                    label="Stream Description"
-                    component={this.renderInput}
-                />
-                <button className="ui primary button">Submit</button>
-            </form>
+            <div>
+                <h3>Create a Stream</h3>
+                <StreamForm onSubmit={this.onSubmit} />
+            </div>
         );
     }
 }
 
-const validate = (formValues) => {
-    const errors = {};
-    if (!formValues.title) {
-        errors.title = {
-            head: " 🐣 Wait!",
-            body: " Your stream needs a!"
-        };
-    }
-    if (!formValues.description) {
-        errors.description = {
-            head: "🐥 Quackers!",
-            body: "Don't forget to add a description to your stream to help others find you!"
-        };
-    }
-    return errors;
-};
-
-const myCreateStreamForm = reduxForm({
-    form: "streamCreate",
-    validate
-})(StreamCreate);
-
-export default connect(null, { createStream })(myCreateStreamForm);
+export default connect(null, { createStream })(StreamCreate);
