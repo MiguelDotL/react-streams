@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchStream, editStream } from "../../actions";
+import StreamForm from "./StreamForm";
 
 class StreamEdit extends Component {
     componentDidMount() {
@@ -8,6 +9,11 @@ class StreamEdit extends Component {
 
         this.props.fetchStream(streamId);
     }
+    onSubmit = async (formValues) => {
+        console.log(formValues);
+        const streamId = this.props.match.params.id;
+        await this.props.editStream(streamId, formValues);
+    };
 
     render() {
         const stream = this.props.stream;
@@ -20,11 +26,18 @@ class StreamEdit extends Component {
             );
         }
 
+        const INITIAL_VALUES = {
+            title: stream.title,
+            description: stream.description
+        };
+
         return (
             <div>
-                <h2>Edit Stream</h2>
-                <div>Title: {stream.title}</div>
-                <div>Description: {stream.description}</div>
+                <h3>Edit Stream</h3>
+                <StreamForm
+                    initialValues={INITIAL_VALUES}
+                    onSubmit={this.onSubmit}
+                />
             </div>
         );
     }
