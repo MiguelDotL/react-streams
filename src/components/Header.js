@@ -5,7 +5,8 @@ import logo512 from "../assets/images/logo-512.png";
 
 const Header = () => {
     return (
-        <div className="ui secondary pointing menu ">
+        //  <div className="ui secondary pointing menu ">
+        <div className="ui primary pointing menu ">
             <Link to="/" className="item">
                 <div className="ui horizontal list">
                     <div className="item">

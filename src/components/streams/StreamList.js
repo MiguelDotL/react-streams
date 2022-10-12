@@ -18,7 +18,12 @@ class StreamList extends Component {
                     >
                         Edit
                     </Link>
-                    <button className="ui basic red button">Delete</button>
+                    <Link
+                        to={`/streams/delete/${stream.id}`}
+                        className="ui basic red button"
+                    >
+                        Delete
+                    </Link>
                 </div>
             );
         }
@@ -42,11 +47,12 @@ class StreamList extends Component {
     renderCreateStreamButton = (stream) => {
         if (this.props.isSignedIn) {
             return (
-                <div className="content">
+                <div className="content" style={{ textAlign: "right" }}>
                     <Link
                         to={"/streams/new"}
-                        className="ui right floated primary button"
+                        className="ui primary labeled icon button"
                     >
+                        <i class="plus icon"></i>
                         Create Stream
                     </Link>
                 </div>
@@ -55,9 +61,9 @@ class StreamList extends Component {
     };
 
     render() {
-        console.log("streams: ", this.props.streams);
+        // console.log("streams: ", this.props.streams);
         return (
-            <div>
+            <div className="ui segment">
                 <h2>Streams</h2>
                 <div className="ui middle aligned celled list">
                     {this.renderList()}

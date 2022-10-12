@@ -1,0 +1,4 @@
+#modal .dimmer.visible.transition {
+    display: flex!important;
+    visibility: visible!important;
+}
