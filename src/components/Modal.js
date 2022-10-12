@@ -1,8 +1,7 @@
 import "../assets/styles/Modal.css";
-import logoStroke from "../assets/images/logo-stroke-512.png";
-
 import React from "react";
 import ReactDOM from "react-dom";
+import logoStroke from "../assets/images/logo-stroke-512.png";
 
 const Modal = (props) => {
     const modal = props.config;
@@ -13,10 +12,11 @@ const Modal = (props) => {
             className="ui dimmer transition visible active"
             onClick={modal.onDismiss}
         >
-            <div
+            <div // modal sizes ["fullscreen", "large", "", "small", "tiny", "mini"]
                 className={`ui modal ${modal.size} transition visible active`}
                 onClick={stopBubbleUp}
             >
+                <i className="close icon" onClick={modal.onDismiss}></i>
                 <div className="header">{modal.title}</div>
 
                 <div className="image content">
@@ -27,6 +27,7 @@ const Modal = (props) => {
                     <div className="description">
                         <div className="ui header">{modal.header}</div>
                         <p>{modal.body}</p>
+                        <div className="">{props.description}</div>
                     </div>
                 </div>
 
